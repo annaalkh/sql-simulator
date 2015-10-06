@@ -13,4 +13,14 @@ public class TestPageController {
         return "test";
     }
 
+    @RequestMapping("/student")
+    public String studentPage() {
+        return "studentView";
+    }
+
+    @RequestMapping("/teacher")
+    public String teacherPage() {
+        return "teacherView";
+    }
+
 }
