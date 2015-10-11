@@ -2,8 +2,9 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script  src="../js/student.js" ></script>
 </head>
 <body>
     <div class="row" >
@@ -14,7 +15,7 @@
                     <span class="label label-default">Задание</span>
                 </div>
                 <div>
-                    <span>Выберите всех сотрудников с возрастом более 20 лет</span>
+                    <span id="taskText"></span>
                 </div>
             </div>
             <div  class="base">
@@ -22,17 +23,17 @@
                     <span class="label label-default">Введите запрос</span>
                 </div>
                 <div>
-                    <textarea class="fullScreen">Запрос</textarea>
+                    <textarea class="fullScreen" id="studentQuery"></textarea>
                 </div>
                 <div>
-                    <button type="button">Выполнить</button>
+                    <button type="button" id="runButton">Выполнить</button>
                 </div>
             </div>
             <div  class="base">
                 <div>
                     <span class="label label-default">Результат запроса</span>
                 </div>
-                <div>
+                <div id="queryResult">
                         <table class="table">
                           <tr>
                               <td>Имя</td>
