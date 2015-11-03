@@ -1,4 +1,4 @@
-package ru.hse.sqlsimulator.web.mvc;
+    package ru.hse.sqlsimulator.web.mvc;
 
 import java.util.Locale;
 import org.hibernate.HibernateException;
@@ -22,21 +22,23 @@ import ru.hse.sqlsimulator.web.dto.TestPersonDTO;
  * Created by Anna on 10/13/2015.
  */
 @Controller
-public class TestMvcController {
+@RequestMapping(value = "/test-task")
+public class TestTaskController {
     
 
-    @RequestMapping(value = "/test-mvc", method = RequestMethod.GET)
-    public ModelAndView testPage() {
-        ModelAndView modelAndView = new ModelAndView("testPageJsp");
-        TestPersonDTO testPersonDto = new TestPersonDTO();
-        testPersonDto.setName("Test name");
-        testPersonDto.setSurname("Test surname");
-        modelAndView.addObject("person", testPersonDto);
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView testTask() {
+        ModelAndView modelAndView = new ModelAndView("testTaskJsp");
+        StudentTaskDTO taskDTO = new StudentTaskDTO();
+        taskDTO.setName("Test task 1");
+        taskDTO.setDescription("Task Description");
+        taskDTO.setIs_active(true);
+        modelAndView.addObject("task", taskDTO);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/test-mvc", method = RequestMethod.POST)
-    public ModelAndView submitTestPage(@ModelAttribute TestPersonDTO person) {
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView submitTestTask(@ModelAttribute StudentTaskDTO task) {
         Locale.setDefault(Locale.US);
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
@@ -44,10 +46,10 @@ public class TestMvcController {
         String res = "Failed";
         try{
             tx = session.beginTransaction();
-            UserDTO user = new UserDTO(person.getName(), person.getName(), person.getSurname(), 2);
-            session.save(user);
+            StudentTaskDTO studentTask = new StudentTaskDTO(task.getName(), task.getDescription(), task.isIs_active());
+            session.save(studentTask);
             tx.commit();
-            res = "New user created successfully!";
+            res = "New task was created successfully!";
         }catch(HibernateException e){
             res = "Failed with exception";
             if(tx!=null)    tx.rollback();
@@ -57,9 +59,9 @@ public class TestMvcController {
             sessionFactory.close();
         }
         
-        person.setName(res);
-        ModelAndView modelAndView = new ModelAndView("testPageJsp");
-        modelAndView.addObject("person", person);
+        task.setName(res);
+        ModelAndView modelAndView = new ModelAndView("testTaskJsp");
+        modelAndView.addObject("task", task);
         return modelAndView;
     }
 }
