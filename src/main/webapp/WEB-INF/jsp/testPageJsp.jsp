@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Test page MVC</h1>
-<form:form modelAttribute="person" action="/test-mvc">
+<form:form modelAttribute="person" action="test-mvc">
     Name: <form:input path="name"></form:input>
     Surname: <form:input path="surname"></form:input>
     <form:button>Submit</form:button>
