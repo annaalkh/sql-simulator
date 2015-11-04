@@ -32,7 +32,7 @@ public class TestTaskController {
         StudentTaskDTO taskDTO = new StudentTaskDTO();
         taskDTO.setName("Test task 1");
         taskDTO.setDescription("Task Description");
-        taskDTO.setIs_active(true);
+        taskDTO.setActive(true);
         modelAndView.addObject("task", taskDTO);
         return modelAndView;
     }
@@ -46,7 +46,7 @@ public class TestTaskController {
         String res = "Failed";
         try{
             tx = session.beginTransaction();
-            StudentTaskDTO studentTask = new StudentTaskDTO(task.getName(), task.getDescription(), task.isIs_active());
+            StudentTaskDTO studentTask = new StudentTaskDTO(task.getName(), task.getDescription(), task.getActive());
             session.save(studentTask);
             tx.commit();
             res = "New task was created successfully!";

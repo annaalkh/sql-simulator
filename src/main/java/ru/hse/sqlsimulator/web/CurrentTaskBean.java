@@ -1,6 +1,7 @@
 package ru.hse.sqlsimulator.web;
 
 import org.springframework.stereotype.Component;
+import ru.hse.sqlsimulator.model.StudentTask;
 import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
 
 import javax.annotation.PostConstruct;
@@ -21,5 +22,11 @@ public class CurrentTaskBean {
 
     public StudentTaskDTO getCurrentTask() {
         return currentTask;
+    }
+
+    public void setCurrentTask(StudentTask studentTask) {
+        //convert studentTask to dto
+        StudentTaskDTO taskDTO = new StudentTaskDTO();
+        this.currentTask = taskDTO;
     }
 }

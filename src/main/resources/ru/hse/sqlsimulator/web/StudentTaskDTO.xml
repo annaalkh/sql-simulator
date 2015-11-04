@@ -7,10 +7,10 @@
     </id>
     <property column="name" name="name"/>
     <property column="description" name="description"/>
-    <property column="is_active" name="is_active"/>
-    <property column="is_planned" name="is_planned"/>
-    <property column="start_date" name="start_date"/>
-    <property column="end_date" name="end_date"/>
-    <property column="act_date" name="act_date"/>
+    <property column="is_active" name="active"/>
+    <property column="is_planned" name="planned"/>
+    <property column="start_date" name="startDate" type="date" />
+    <property column="end_date" name="endDate" type="date"/>
+    <property column="act_date" name="actDate" type="date"/>
   </class>
 </hibernate-mapping>

@@ -10,7 +10,7 @@
 <form:form modelAttribute="task" action="test-task">
     Task Name: <form:input path="name"></form:input>
     Task description: <form:input path="description"></form:input>
-    Task active? <form:checkbox path="is_active"></form:checkbox>
+    Task active? <form:checkbox path="active"></form:checkbox>
     <form:button>Submit</form:button>
 </form:form>
 

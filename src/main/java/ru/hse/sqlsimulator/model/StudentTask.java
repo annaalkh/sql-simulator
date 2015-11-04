@@ -1,11 +1,11 @@
-package ru.hse.sqlsimulator.web.dto;
+package ru.hse.sqlsimulator.model;
 
 import java.util.Date;
 
 /**
- * Created by Anna on 10/11/2015.
+ * Created by Anna on 11/4/2015.
  */
-public class StudentTaskDTO {
+public class StudentTask {
 
     private int id;
     private String taskText;
@@ -17,14 +17,12 @@ public class StudentTaskDTO {
     private Date endDate;
     private Date actDate;
 
-    public StudentTaskDTO() {
-
+    public int getId() {
+        return id;
     }
 
-    public StudentTaskDTO(String name, String description, Boolean isActive) {
-        this.name = name;
-        this.description = description;
-        this.isActive = isActive;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTaskText() {
@@ -57,14 +55,6 @@ public class StudentTaskDTO {
 
     public void setActive(Boolean active) {
         isActive = active;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Boolean getPlanned() {
