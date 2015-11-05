@@ -4,6 +4,8 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <script  src="../js/teacher.js" ></script>
+    <script  src="../js/common.js" ></script>
 </head>
 <body>
 <div class="row" >
@@ -14,10 +16,10 @@
                 <span class="label label-default">Задание</span>
             </div>
             <div>
-                <textarea class="fullScreen">Выберите всех сотрудников с возрастом более 20 лет</textarea>
+                <textarea class="fullScreen" id="taskText">Выберите всех сотрудников с возрастом более 20 лет</textarea>
             </div>
             <div>
-                <button type="button">Опубликовать задание</button>
+                <button type="button" id="publishTask">Опубликовать задание</button>
             </div>
         </div>
         <div class="base">
@@ -38,8 +40,16 @@
                     </tr>
                 </table>
             </div>
+            <div class="base">
+                <div>
+                    <span class="label label-default">Правильный ответ</span>
+                </div>
+                <div>
+                    <textarea class="fullScreen" id="correctAnswer"></textarea>
+                </div>
+            </div>
             <div>
-                <button type="button">Завершить задание</button>
+                <button type="button" id="completeTask">Завершить задание</button>
             </div>
         </div>
     </div>

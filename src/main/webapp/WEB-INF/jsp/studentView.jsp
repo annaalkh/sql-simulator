@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <script  src="../js/student.js" ></script>
+    <script  src="../js/common.js" ></script>
 </head>
 <body>
     <div class="row" >
@@ -43,6 +44,14 @@
                 </div>
                 <div>
                     <button type="button">Отправить на проверку</button>
+                </div>
+            </div>
+            <div class="base">
+                <div>
+                    <span class="label label-default">Правильное решение</span>
+                </div>
+                <div>
+                    <span id="correctAnswer"></span>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package ru.hse.sqlsimulator.web.dto;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Anna on 10/11/2015.
@@ -16,6 +17,7 @@ public class StudentTaskDTO {
     private Date startDate;
     private Date endDate;
     private Date actDate;
+    private String correctAnswer;
 
     public StudentTaskDTO() {
 
@@ -25,6 +27,12 @@ public class StudentTaskDTO {
         this.name = name;
         this.description = description;
         this.isActive = isActive;
+    }
+
+    public static StudentTaskDTO taskForPair(String taskText) {
+        StudentTaskDTO dto = new StudentTaskDTO("", taskText, true);
+        dto.setId(new Random().nextInt());
+        return dto;
     }
 
     public String getTaskText() {
@@ -97,5 +105,13 @@ public class StudentTaskDTO {
 
     public void setActDate(Date actDate) {
         this.actDate = actDate;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 }

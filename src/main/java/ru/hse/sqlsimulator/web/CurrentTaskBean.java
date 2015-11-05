@@ -29,4 +29,8 @@ public class CurrentTaskBean {
         StudentTaskDTO taskDTO = new StudentTaskDTO();
         this.currentTask = taskDTO;
     }
+
+    public void setCurrentTask(StudentTaskDTO studentTaskDTO) {
+        this.currentTask = studentTaskDTO;
+    }
 }
