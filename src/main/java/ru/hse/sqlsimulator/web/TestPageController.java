@@ -23,4 +23,9 @@ public class TestPageController {
         return "teacherView";
     }
 
+    @RequestMapping("/create-task")
+    public String createTaskPage() {
+        return "taskCreationView";
+    }
+
 }

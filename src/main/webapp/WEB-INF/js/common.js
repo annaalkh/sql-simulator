@@ -14,5 +14,9 @@ function sendRequest(method, url, data, successCallback) {
     }
 
     anHttpRequest.open(method, url, true );
-    anHttpRequest.send(data);
+
+    anHttpRequest.setRequestHeader('Accept', 'application/json');
+    anHttpRequest.setRequestHeader('Content-Type', 'application/json');
+
+    anHttpRequest.send(JSON.stringify(data));
 }

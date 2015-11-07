@@ -10,4 +10,6 @@ public interface TaskService {
     public StudentTask getActiveTaskForLecture();
 
     public void setActiveTaskForLecture(StudentTask studentTask);
+
+    public void saveTask(StudentTask task);
 }

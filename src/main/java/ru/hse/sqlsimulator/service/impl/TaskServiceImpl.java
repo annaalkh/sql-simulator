@@ -25,4 +25,8 @@ public class TaskServiceImpl implements TaskService {
         //вся работа с базой данных
         currentTaskBean.setCurrentTask(studentTask);
     }
+
+    public void saveTask(StudentTask task) {
+        System.out.println("Service: task is saved, name: " + task.getName());
+    }
 }
