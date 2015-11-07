@@ -6,7 +6,7 @@ var TeacherPage = function() {
             var taskText = document.getElementById("taskText").value;
             var data = {
                 name: taskTitle,
-                taskText: taskText
+                description: taskText
             };
             sendPostRequest("/task-management/save-task", data, function(response) {
                 document.getElementById("taskTitle").value =  "";

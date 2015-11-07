@@ -9,7 +9,7 @@ import java.util.Random;
 public class StudentTaskDTO {
 
     private int id;
-    private String taskText;
+//    private String taskText;
     private String name;
     private String description;
     private Boolean isActive;
@@ -35,13 +35,13 @@ public class StudentTaskDTO {
         return dto;
     }
 
-    public String getTaskText() {
-        return taskText;
-    }
-
-    public void setTaskText(String taskText) {
-        this.taskText = taskText;
-    }
+//    public String getTaskText() {
+//        return taskText;
+//    }
+//
+//    public void setTaskText(String taskText) {
+//        this.taskText = taskText;
+//    }
 
     public String getName() {
         return name;

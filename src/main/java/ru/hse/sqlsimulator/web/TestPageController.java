@@ -20,7 +20,7 @@ public class TestPageController {
 
     @RequestMapping("/teacher")
     public String teacherPage() {
-        return "teacherView";
+        return "teacherLessonView";
     }
 
     @RequestMapping("/create-task")

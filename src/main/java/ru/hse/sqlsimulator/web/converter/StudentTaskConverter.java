@@ -19,10 +19,20 @@ public class StudentTaskConverter {
 
         task.setId(random.nextInt());
         task.setName(dto.getName());
-        task.setTaskText(dto.getTaskText());
+        task.setDescription(dto.getDescription());
         task.setActive(false);
         task.setPlanned(false);
 
         return task;
+    }
+
+    public StudentTaskDTO toDto(StudentTask task) {
+        StudentTaskDTO dto = new StudentTaskDTO();
+
+        dto.setId(task.getId());
+        dto.setName(task.getName());
+        dto.setDescription(task.getDescription());
+
+        return dto;
     }
 }
