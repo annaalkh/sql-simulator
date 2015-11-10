@@ -4,6 +4,7 @@ import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.hse.sqlsimulator.model.StudentTask;
 import ru.hse.sqlsimulator.service.TaskService;
 import ru.hse.sqlsimulator.web.CurrentTaskBean;
@@ -27,6 +28,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     CurrentTaskBean currentTaskBean;
+
+    @Autowired
+    SessionFactory sessionFactory;
 
     @Override
     public StudentTask getActiveTaskForLecture() {        
@@ -82,22 +86,10 @@ public class TaskServiceImpl implements TaskService {
         return setActiveTaskForLecture(getTaskByID(taskId));
     }
 
+    @Transactional
     public void saveTask(StudentTask task) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-        
-        try{
-            tx = session.beginTransaction();
-            session.save(task);
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.save(task);
     }
 
     public List<StudentTask> getAllTasksForLesson(Date date) {
@@ -150,10 +142,7 @@ public class TaskServiceImpl implements TaskService {
         StudentTask task = null;
         try{
             tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(StudentTask.class);
-            cr.add(Restrictions.eq("id", id));
-            List tasks = cr.list();
-            if(tasks != null && !tasks.isEmpty()) task = (StudentTask) tasks.get(0);
+            task = (StudentTask) session.get(StudentTask.class, id);
             tx.commit();
         }catch(HibernateException e){
             if(tx!=null)    tx.rollback();
