@@ -1,6 +1,6 @@
 package ru.hse.sqlsimulator.model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Random;
 
 /**
@@ -17,7 +17,15 @@ public class StudentTask {
     private Date startDate;
     private Date endDate;
     private Date actDate;
+    
+    public StudentTask(){}
 
+    public StudentTask(String name, String taskText, Boolean isActive) {
+        this.name = name;
+        this.taskText = taskText;
+        this.isActive = isActive;
+    }
+    
     //temp
     public static StudentTask get(String name, String taskText) {
         StudentTask task = new StudentTask();
@@ -26,7 +34,7 @@ public class StudentTask {
         task.setDescription(taskText);
         return task;
     }
-
+    
     public int getId() {
         return id;
     }

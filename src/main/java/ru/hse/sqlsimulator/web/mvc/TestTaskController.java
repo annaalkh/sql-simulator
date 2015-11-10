@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ru.hse.sqlsimulator.model.StudentTask;
 import ru.hse.sqlsimulator.web.CurrentTaskBean;
 import ru.hse.sqlsimulator.web.dto.UserDTO;
 import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
@@ -46,7 +47,7 @@ public class TestTaskController {
         String res = "Failed";
         try{
             tx = session.beginTransaction();
-            StudentTaskDTO studentTask = new StudentTaskDTO(task.getName(), task.getDescription(), task.getActive());
+            StudentTask studentTask = new StudentTask(task.getName(), task.getDescription(), task.getActive());
             session.save(studentTask);
             tx.commit();
             res = "New task was created successfully!";

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ru.hse.sqlsimulator.model.User;
 import ru.hse.sqlsimulator.web.CurrentTaskBean;
 import ru.hse.sqlsimulator.web.dto.UserDTO;
 import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
@@ -44,7 +45,7 @@ public class TestMvcController {
         String res = "Failed";
         try{
             tx = session.beginTransaction();
-            UserDTO user = new UserDTO(person.getName(), person.getName(), person.getSurname(), 2);
+            User user = new User(person.getName(), person.getName(), person.getSurname(), 2);
             session.save(user);
             tx.commit();
             res = "New user created successfully!";

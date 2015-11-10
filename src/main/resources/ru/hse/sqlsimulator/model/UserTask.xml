@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ru.hse.sqlsimulator.model">
+  <class name="UserTask" table="user_tasks">
+    <id column="id" name="id" type="int">
+      <generator class="increment"/>
+    </id>
+    <property column="user_id" name="userId"/>
+    <property column="task_id" name="taskId"/>
+    <property column="is_draft" name="isDraft"/>
+    <property column="is_correct" name="isCorrect"/>
+    <property column="answer" name="answer"/>
+    <property column="answer_date" name="answerDate" type="date" />
+  </class>
+</hibernate-mapping>

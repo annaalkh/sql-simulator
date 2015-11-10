@@ -32,6 +32,9 @@ public class StudentTaskConverter {
         dto.setId(task.getId());
         dto.setName(task.getName());
         dto.setDescription(task.getDescription());
+        dto.setTaskText(task.getTaskText());
+        dto.setActive(task.getActive());
+        dto.setActDate(task.getActDate());
 
         return dto;
     }
