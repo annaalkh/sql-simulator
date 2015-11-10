@@ -1,5 +1,6 @@
 package ru.hse.sqlsimulator.web.rest;
 
+import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +13,12 @@ import ru.hse.sqlsimulator.web.converter.StudentTaskConverter;
 import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import ru.hse.sqlsimulator.model.User;
+import ru.hse.sqlsimulator.service.UserService;
 
 /**
  * Created by Anna on 11/5/2015.
@@ -24,6 +28,9 @@ public class TeacherController {
 
     @Autowired
     private TaskService taskService;
+    
+    @Autowired
+    private UserService userService;
 
     @Autowired
     StudentTaskConverter taskConverter;
@@ -34,8 +41,14 @@ public class TeacherController {
     @RequestMapping(value = "/teacher/get-tasks-for-lesson", method = RequestMethod.GET)
     public List<StudentTaskDTO> getAllTasksForLesson() {
         System.out.println("Get all tasks for lesson" );
-        List<StudentTask> taskList = taskService.getAllTasksForLesson();
-        List<StudentTaskDTO> taskDTOs = taskList.stream().map(taskConverter::toDto).collect(Collectors.toList());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2015, 9, 20, 0, 0, 0);
+        List<StudentTask> taskList = taskService.getAllTasksForLesson(new Date(calendar.getTime().getTime()));
+        List<StudentTaskDTO> taskDTOs = null;
+        if(taskList != null && !taskList.isEmpty()){
+            taskDTOs = taskList.stream().map(taskConverter::toDto).collect(Collectors.toList());
+        }
+        taskService.setActiveTaskForLecture(8);
         return taskDTOs;
     }
 
@@ -52,5 +65,17 @@ public class TeacherController {
         System.out.println("Task completed. Correct answer: " + correntAnswer);
         StudentTaskDTO taskDTO = currentTaskBean.getCurrentTask();
         taskDTO.setCorrectAnswer(correntAnswer);
+    }
+    
+    @RequestMapping(value = "/teacher/all-students", method = RequestMethod.GET)
+    public List<User> getAllStudents() {
+        List<User> userList = userService.getAllUsersWithRole(2);
+        return userList;
+    }
+    
+    @RequestMapping(value = "/teacher/get-with-2", method = RequestMethod.GET)
+    public User getStudentWithID2() {
+        User user = userService.getUserByID(2);
+        return user;
     }
 }
