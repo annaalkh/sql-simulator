@@ -33,50 +33,28 @@ public class TaskServiceImpl implements TaskService {
     SessionFactory sessionFactory;
 
     @Override
+    @Transactional
     public StudentTask getActiveTaskForLecture() {        
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(StudentTask.class);
+        cr.add(Restrictions.eq("is_active", true));
         StudentTask task = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(StudentTask.class);
-            cr.add(Restrictions.eq("is_active", true));
-            List tasks = cr.list();
-            if(!tasks.isEmpty()) task = (StudentTask) tasks.get(0);
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            sessionFactory.close();
-            session.close();
-        }
+        List tasks = cr.list();
+        if(!tasks.isEmpty()) task = (StudentTask) tasks.get(0);
         return task;
     }
 
+    @Transactional
+    @Override
     public StudentTask setActiveTaskForLecture(StudentTask studentTask) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(StudentTask.class);
+        cr.add(Restrictions.eq("id", studentTask.getId()));
         StudentTask task = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(StudentTask.class);
-            cr.add(Restrictions.eq("id", studentTask.getId()));
-            List tasksList = cr.list();
-            if(tasksList != null && !tasksList.isEmpty()) task = (StudentTask) tasksList.get(0);
-            task.setActive(Boolean.TRUE);
-            session.save(task);
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
-        
+        List tasksList = cr.list();
+        if(tasksList != null && !tasksList.isEmpty()) task = (StudentTask) tasksList.get(0);
+        task.setActive(Boolean.TRUE);
+        session.save(task);        
         currentTaskBean.setCurrentTask(studentTask);
         return studentTask;
     }
@@ -87,72 +65,37 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Transactional
+    @Override
     public void saveTask(StudentTask task) {
         Session session = sessionFactory.getCurrentSession();
         session.save(task);
     }
 
+    @Transactional
+    @Override
     public List<StudentTask> getAllTasksForLesson(Date date) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
-        List<StudentTask> tasks = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(StudentTask.class);
-            cr.add(Restrictions.eq("act_date", date));
-            tasks = cr.list();
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(StudentTask.class);
+        cr.add(Restrictions.eq("act_date", date));
+        List<StudentTask> tasks =  cr.list();
         return tasks;
     }
     
+    @Transactional
+    @Override
     public List<StudentTask> getAllTasks() {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
         List<StudentTask> tasks = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(StudentTask.class);
-            tasks = cr.list();
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        Criteria cr = session.createCriteria(StudentTask.class);
+        tasks = cr.list();
         return tasks;
     }
 
     @Override
+    @Transactional
     public StudentTask getTaskByID(int id){
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        
-        Transaction tx = null;
-        StudentTask task = null;
-        try{
-            tx = session.beginTransaction();
-            task = (StudentTask) session.get(StudentTask.class, id);
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        StudentTask task = (StudentTask) session.get(StudentTask.class, id);
         return task;
     }
-
-    
 }

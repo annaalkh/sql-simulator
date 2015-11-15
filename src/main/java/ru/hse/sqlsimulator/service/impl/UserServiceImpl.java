@@ -1,6 +1,5 @@
 package ru.hse.sqlsimulator.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -9,7 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.hse.sqlsimulator.model.User;
 import ru.hse.sqlsimulator.service.UserService;
 
@@ -18,73 +19,38 @@ import ru.hse.sqlsimulator.service.UserService;
  */
 @Component
 public class UserServiceImpl implements UserService {
+    
+    @Autowired
+    SessionFactory sessionFactory;
 
     @Override
+    @Transactional
     public User getUserByID(int id){
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        
-        Transaction tx = null;
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(User.class);
+        cr.add(Restrictions.eq("id", id));
         User user = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(User.class);
-            cr.add(Restrictions.eq("id", id));
-            List users = cr.list();
-            if(!users.isEmpty()) user = (User) users.get(0);
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        List users = cr.list();
+        if(!users.isEmpty()) user = (User) users.get(0);
         return user;
     }
 
     @Override
+    @Transactional
     public List<User> getAllUsers(){
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        
-        Transaction tx = null;
-        List<User> users = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(User.class);
-            users = cr.list();
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Criteria cr = session.createCriteria(User.class);
+        List<User> users = cr.list();
         return users;
     }
 
     @Override
+    @Transactional
     public List<User> getAllUsersWithRole(int role){
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        
-        Transaction tx = null;
-        List<User> users = null;
-        try{
-            tx = session.beginTransaction();
-            Criteria cr = session.createCriteria(User.class);
-            cr.add(Restrictions.eq("role", role));
-            users = cr.list();
-            tx.commit();
-        }catch(HibernateException e){
-            if(tx!=null)    tx.rollback();
-            e.printStackTrace();
-        }finally{
-            session.close();
-            sessionFactory.close();
-        }
+        Session session = sessionFactory.openSession();        
+        Criteria cr = session.createCriteria(User.class);
+        cr.add(Restrictions.eq("role", role));
+        List<User> users = cr.list();
         return users;
     }
    

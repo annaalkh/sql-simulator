@@ -38,12 +38,12 @@ public class TeacherController {
     @Autowired
     private CurrentTaskBean currentTaskBean;
 
-    @RequestMapping(value = "/teacher/get-tasks-for-lesson", method = RequestMethod.GET)
+    @RequestMapping(value = "/teacher/get-tasks", method = RequestMethod.GET)
     public List<StudentTaskDTO> getAllTasksForLesson() {
         System.out.println("Get all tasks for lesson" );
         Calendar calendar = Calendar.getInstance();
         calendar.set(2015, 9, 20, 0, 0, 0);
-        List<StudentTask> taskList = taskService.getAllTasksForLesson(new Date(calendar.getTime().getTime()));
+        List<StudentTask> taskList = taskService.getAllTasks();
         List<StudentTaskDTO> taskDTOs = null;
         if(taskList != null && !taskList.isEmpty()){
             taskDTOs = taskList.stream().map(taskConverter::toDto).collect(Collectors.toList());
