@@ -25,4 +25,10 @@ public class StudentController {
         System.out.println("Query: " + query);
         return query;
     }
+
+    @RequestMapping(value = "/student/check-task", method = RequestMethod.POST)
+    public Object checkTask(@RequestBody String query) {
+        System.out.println("Query: " + query);
+        return query;
+    }
 }

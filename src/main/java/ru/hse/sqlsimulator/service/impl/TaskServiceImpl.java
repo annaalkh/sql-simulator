@@ -23,7 +23,7 @@ import ru.hse.sqlsimulator.model.User;
 /**
  * Created by Anna on 11/4/2015.
  */
-@Component
+@Repository
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
@@ -34,7 +34,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public StudentTask getActiveTaskForLecture() {        
+    public StudentTask getActiveTaskForLecture() {
         Session session = sessionFactory.getCurrentSession();
         Criteria cr = session.createCriteria(StudentTask.class);
         cr.add(Restrictions.eq("is_active", true));
@@ -54,12 +54,13 @@ public class TaskServiceImpl implements TaskService {
         List tasksList = cr.list();
         if(tasksList != null && !tasksList.isEmpty()) task = (StudentTask) tasksList.get(0);
         task.setActive(Boolean.TRUE);
-        session.save(task);        
+        session.save(task);
         currentTaskBean.setCurrentTask(studentTask);
         return studentTask;
     }
 
     @Override
+    @Transactional
     public StudentTask setActiveTaskForLecture(Integer taskId) {
         return setActiveTaskForLecture(getTaskByID(taskId));
     }

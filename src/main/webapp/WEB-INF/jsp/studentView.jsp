@@ -43,7 +43,7 @@
                         </table>
                 </div>
                 <div>
-                    <button type="button">Отправить на проверку</button>
+                    <button type="button" id="checkButton">Отправить на проверку</button>
                 </div>
             </div>
             <div class="base">

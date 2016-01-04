@@ -10,6 +10,13 @@ var StudentPage = function() {
                 document.getElementById("queryResult").innerHTML = response;
             })
         }
+
+        document.getElementById("checkButton").onclick = function() {
+            var query = document.getElementById("studentQuery").value;
+            sendPostRequest("/student/check-task", query, function(response) {
+                alert("Решение отправлено на проверку, ждите результата")
+            })
+        }
     });
 
     function refreshCurrentTask() {
