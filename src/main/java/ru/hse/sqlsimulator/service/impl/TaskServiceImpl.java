@@ -33,18 +33,16 @@ public class TaskServiceImpl implements TaskService {
     SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public StudentTask getActiveTaskForLecture() {        
         Session session = sessionFactory.getCurrentSession();
         Criteria cr = session.createCriteria(StudentTask.class);
         cr.add(Restrictions.eq("is_active", true));
         StudentTask task = null;
         List tasks = cr.list();
-        if(!tasks.isEmpty()) task = (StudentTask) tasks.get(0);
+        if(tasks != null && !tasks.isEmpty()) task = (StudentTask) tasks.get(0);
         return task;
     }
 
-    @Transactional
     @Override
     public StudentTask setActiveTaskForLecture(StudentTask studentTask) {
         Session session = sessionFactory.getCurrentSession();
@@ -64,38 +62,30 @@ public class TaskServiceImpl implements TaskService {
         return setActiveTaskForLecture(getTaskByID(taskId));
     }
 
-    @Transactional
     @Override
     public void saveTask(StudentTask task) {
         Session session = sessionFactory.getCurrentSession();
         session.save(task);
     }
 
-    @Transactional
     @Override
     public List<StudentTask> getAllTasksForLesson(Date date) {
         Session session = sessionFactory.getCurrentSession();
         Criteria cr = session.createCriteria(StudentTask.class);
         cr.add(Restrictions.eq("act_date", date));
-        List<StudentTask> tasks =  cr.list();
-        return tasks;
+        return cr.list();
     }
     
-    @Transactional
     @Override
     public List<StudentTask> getAllTasks() {
         Session session = sessionFactory.getCurrentSession();
-        List<StudentTask> tasks = null;
         Criteria cr = session.createCriteria(StudentTask.class);
-        tasks = cr.list();
-        return tasks;
+        return cr.list();
     }
 
     @Override
-    @Transactional
     public StudentTask getTaskByID(int id){
         Session session = sessionFactory.getCurrentSession();
-        StudentTask task = (StudentTask) session.get(StudentTask.class, id);
-        return task;
+        return (StudentTask) session.get(StudentTask.class, id);
     }
 }
