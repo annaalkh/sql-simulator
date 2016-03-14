@@ -1,14 +1,19 @@
 package ru.hse.sqlsimulator.service.impl;
 
 import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hse.sqlsimulator.model.User;
+import ru.hse.sqlsimulator.service.AliasToEntityOrderedMapResultTransformer;
 import ru.hse.sqlsimulator.service.UserService;
 
 /**
@@ -44,6 +49,15 @@ public class UserServiceImpl implements UserService {
         Criteria cr = session.createCriteria(User.class);
         cr.add(Restrictions.eq("role", role));
         return cr.list();
+    }
+
+    @Override
+    public List<Map<String, Object>> executeUserQuery(String query){
+        Session session = sessionFactory.getCurrentSession();
+        Query sqlQuery = session.createSQLQuery(query);
+        sqlQuery.setResultTransformer(AliasToEntityOrderedMapResultTransformer.INSTANCE);
+        List<Map<String, Object>> aliasToValueMapList = sqlQuery.list();
+        return aliasToValueMapList;
     }
    
 }

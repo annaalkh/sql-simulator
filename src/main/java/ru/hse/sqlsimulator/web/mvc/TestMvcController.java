@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.hse.sqlsimulator.model.User;
 import ru.hse.sqlsimulator.web.CurrentTaskBean;
-import ru.hse.sqlsimulator.web.dto.UserDTO;
-import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
-import ru.hse.sqlsimulator.web.dto.TestPersonDTO;
+import ru.hse.sqlsimulator.web.dto.TestPersonDto;
+import ru.hse.sqlsimulator.web.dto.UserDto;
+import ru.hse.sqlsimulator.web.dto.StudentTaskDto;
+import ru.hse.sqlsimulator.web.dto.TestPersonDto;
 
 /**
  * Created by Anna on 10/13/2015.
@@ -29,7 +30,7 @@ public class TestMvcController {
     @RequestMapping(value = "/test-mvc", method = RequestMethod.GET)
     public ModelAndView testPage() {
         ModelAndView modelAndView = new ModelAndView("testPageJsp");
-        TestPersonDTO testPersonDto = new TestPersonDTO();
+        TestPersonDto testPersonDto = new TestPersonDto();
         testPersonDto.setName("Test name");
         testPersonDto.setSurname("Test surname");
         modelAndView.addObject("person", testPersonDto);
@@ -37,7 +38,7 @@ public class TestMvcController {
     }
 
     @RequestMapping(value = "/test-mvc", method = RequestMethod.POST)
-    public ModelAndView submitTestPage(@ModelAttribute TestPersonDTO person) {
+    public ModelAndView submitTestPage(@ModelAttribute TestPersonDto person) {
         Locale.setDefault(Locale.US);
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();

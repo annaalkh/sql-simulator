@@ -2,7 +2,7 @@ package ru.hse.sqlsimulator.web.converter;
 
 import org.springframework.stereotype.Component;
 import ru.hse.sqlsimulator.model.StudentTask;
-import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
+import ru.hse.sqlsimulator.web.dto.StudentTaskDto;
 
 import java.util.Random;
 
@@ -14,7 +14,7 @@ public class StudentTaskConverter {
 
     private Random random = new Random();
 
-    public StudentTask toTaskForPair(StudentTaskDTO dto) {
+    public StudentTask toTaskForPair(StudentTaskDto dto) {
         StudentTask task = new StudentTask();
 
         task.setId(random.nextInt());
@@ -26,8 +26,8 @@ public class StudentTaskConverter {
         return task;
     }
 
-    public StudentTaskDTO toDto(StudentTask task) {
-        StudentTaskDTO dto = new StudentTaskDTO();
+    public StudentTaskDto toDto(StudentTask task) {
+        StudentTaskDto dto = new StudentTaskDto();
 
         dto.setId(task.getId());
         dto.setName(task.getName());

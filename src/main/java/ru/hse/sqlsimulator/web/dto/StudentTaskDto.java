@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Created by Anna on 10/11/2015.
  */
-public class StudentTaskDTO {
+public class StudentTaskDto {
 
     private int id;
     private String name;
@@ -19,18 +19,18 @@ public class StudentTaskDTO {
     private Date actDate;
     private String correctAnswer;
 
-    public StudentTaskDTO() {
+    public StudentTaskDto() {
 
     }
 
-    public StudentTaskDTO(String name, String description, Boolean isActive) {
+    public StudentTaskDto(String name, String description, Boolean isActive) {
         this.name = name;
         this.description = description;
         this.isActive = isActive;
     }
 
-    public static StudentTaskDTO taskForPair(String taskText) {
-        StudentTaskDTO dto = new StudentTaskDTO("", taskText, true);
+    public static StudentTaskDto taskForPair(String taskText) {
+        StudentTaskDto dto = new StudentTaskDto("", taskText, true);
         dto.setId(new Random().nextInt());
         return dto;
     }

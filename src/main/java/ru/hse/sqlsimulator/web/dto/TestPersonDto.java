@@ -3,7 +3,7 @@ package ru.hse.sqlsimulator.web.dto;
 /**
  * Created by Anna on 10/13/2015.
  */
-public class TestPersonDTO {
+public class TestPersonDto {
 
     private String name;
     private String surname;

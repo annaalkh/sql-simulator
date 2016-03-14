@@ -3,7 +3,7 @@ package ru.hse.sqlsimulator.web.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.hse.sqlsimulator.web.CurrentTaskBean;
-import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
+import ru.hse.sqlsimulator.web.dto.StudentTaskDto;
 
 /**
  * Created by Anna on 10/12/2015.
@@ -15,8 +15,8 @@ public class StudentController {
     private CurrentTaskBean currentTaskBean;
 
     @RequestMapping("/student/current-task")
-    public StudentTaskDTO getCurrentTask() {
-        StudentTaskDTO task = currentTaskBean.getCurrentTask();
+    public StudentTaskDto getCurrentTask() {
+        StudentTaskDto task = currentTaskBean.getCurrentTask();
         return task;
     }
 

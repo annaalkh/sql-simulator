@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.hse.sqlsimulator.model.StudentTask;
 import ru.hse.sqlsimulator.web.converter.StudentTaskConverter;
-import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
+import ru.hse.sqlsimulator.web.dto.StudentTaskDto;
 
 import javax.annotation.PostConstruct;
 
@@ -17,24 +17,24 @@ public class CurrentTaskBean {
     @Autowired
     StudentTaskConverter taskConverter;
 
-    private StudentTaskDTO currentTask;
+    private StudentTaskDto currentTask;
 
     @PostConstruct
     public void init() {
-        currentTask = new StudentTaskDTO();
+        currentTask = new StudentTaskDto();
         currentTask.setDescription("Initial task");
     }
 
-    public StudentTaskDTO getCurrentTask() {
+    public StudentTaskDto getCurrentTask() {
         return currentTask;
     }
 
     public void setCurrentTask(StudentTask studentTask) {
-        StudentTaskDTO taskDTO = taskConverter.toDto(studentTask);
+        StudentTaskDto taskDTO = taskConverter.toDto(studentTask);
         this.currentTask = taskDTO;
     }
 
-    public void setCurrentTask(StudentTaskDTO studentTaskDTO) {
+    public void setCurrentTask(StudentTaskDto studentTaskDTO) {
         this.currentTask = studentTaskDTO;
     }
 }

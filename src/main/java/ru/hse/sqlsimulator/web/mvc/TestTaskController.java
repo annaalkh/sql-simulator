@@ -1,4 +1,4 @@
-    package ru.hse.sqlsimulator.web.mvc;
+package ru.hse.sqlsimulator.web.mvc;
 
 import java.util.Locale;
 import org.hibernate.HibernateException;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.hse.sqlsimulator.model.StudentTask;
 import ru.hse.sqlsimulator.web.CurrentTaskBean;
-import ru.hse.sqlsimulator.web.dto.UserDTO;
-import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
-import ru.hse.sqlsimulator.web.dto.TestPersonDTO;
+import ru.hse.sqlsimulator.web.dto.UserDto;
+import ru.hse.sqlsimulator.web.dto.StudentTaskDto;
+import ru.hse.sqlsimulator.web.dto.TestPersonDto;
 
 /**
  * Created by Anna on 10/13/2015.
@@ -30,7 +30,7 @@ public class TestTaskController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView testTask() {
         ModelAndView modelAndView = new ModelAndView("testTaskJsp");
-        StudentTaskDTO taskDTO = new StudentTaskDTO();
+        StudentTaskDto taskDTO = new StudentTaskDto();
         taskDTO.setName("Test task 1");
         taskDTO.setDescription("Task Description");
         taskDTO.setActive(true);
@@ -39,7 +39,7 @@ public class TestTaskController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView submitTestTask(@ModelAttribute StudentTaskDTO task) {
+    public ModelAndView submitTestTask(@ModelAttribute StudentTaskDto task) {
         Locale.setDefault(Locale.US);
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();

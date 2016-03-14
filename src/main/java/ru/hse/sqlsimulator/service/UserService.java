@@ -1,6 +1,7 @@
 package ru.hse.sqlsimulator.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.hse.sqlsimulator.model.User;
@@ -32,6 +33,11 @@ public interface UserService {
      */
     @Transactional
     List<User> getAllUsersWithRole(int role);
-    
-    
+
+    /**
+     * @param query query to execute
+     * @return result of execution
+     */
+    @Transactional
+    List<Map<String, Object>> executeUserQuery(String query);
 }

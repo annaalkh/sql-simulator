@@ -57,6 +57,9 @@ public interface TaskService {
     @Transactional
     List<StudentTask> getAllTasksForLesson(Date date);
 
+    /**
+     * @return all existing tasks
+     */
     @Transactional
     List<StudentTask> getAllTasks();
 }

@@ -7,7 +7,6 @@ import java.util.Random;
  * Created by Anna on 11/4/2015.
  */
 public class StudentTask {
-
     private int id;
     private String taskText;
     private String name;

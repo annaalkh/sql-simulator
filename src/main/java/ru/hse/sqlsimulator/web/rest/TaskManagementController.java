@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hse.sqlsimulator.model.StudentTask;
 import ru.hse.sqlsimulator.service.TaskService;
 import ru.hse.sqlsimulator.web.converter.StudentTaskConverter;
-import ru.hse.sqlsimulator.web.dto.StudentTaskDTO;
+import ru.hse.sqlsimulator.web.dto.StudentTaskDto;
 
 /**
  * Created by Anna on 11/7/2015.
@@ -22,7 +22,7 @@ public class TaskManagementController {
     StudentTaskConverter taskConverter;
 
     @RequestMapping(value = "/save-task", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void saveTaskForPair(@RequestBody StudentTaskDTO taskDTO) {
+    public void saveTaskForPair(@RequestBody StudentTaskDto taskDTO) {
         System.out.println("Task to save: " + taskDTO.getName());
         StudentTask task = taskConverter.toTaskForPair(taskDTO);
         taskService.saveTask(task);
